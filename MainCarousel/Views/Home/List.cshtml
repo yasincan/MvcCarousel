@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MainCarousel.Models.Carousel>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manşetler Liste <small>Son eklenen resim en baştadır...</small></h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <span>Adı</span>
+        </th>
+        <th>
+            <span>Görünüm sırası</span>
+        </th>
+        <th>
+            <span>Açıklama</span>
+        </th>
+        <th>
+            <span>Resmin Adı</span>
+        </th>
+        <th>
+            <span>Aktif-Pasif</span>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sira)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlternateText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Path)
+        </td>
+        <td>
+            @Html.Raw((item.IsActive == true) ? "✔" : "❌")
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "CarouselEdit", new { id = item.Id }) |
+            @Html.ActionLink("Sil", "CarouselDelete", new { id=item.Id })
+        </td>
+    </tr>
+}
+</table>

@@ -1,0 +1,58 @@
+﻿@model MainCarousel.Models.Carousel
+
+@{
+    ViewBag.Title = "CarouselEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manşet Düzenle</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.Label("Adı")
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Görünüm sırası")
+        @Html.EditorFor(model => model.Sira, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Sira, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Açıklama")
+        @Html.EditorFor(model => model.AlternateText, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AlternateText, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group" style="display:none">
+        @Html.Label("Resmin Adı")
+        @Html.EditorFor(model => model.Path, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Path, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Aktif-Pasif")
+        <div class="checkbox">
+            @Html.EditorFor(model => model.IsActive)
+            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Kaydet" class="btn btn-default" />
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Listeye geri dön.", "List")
+</div>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MainCarousel.Models.Carousel>
+@if (Model != null) {
+    int x=0;
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @foreach (var item in Model)
+        {
+            if (item.IsActive == true)
+            {
+                <li data-target="#carouselExampleIndicators" data-slide-to="@Html.DisplayFor(modelItem => item.Sira)" class="@Html.Raw((item.Sira == 0) ? "active" : "" )"></li>
+            }
+        }
+    </ol>
+    <div class="carousel-inner">
+        @foreach (var item in Model)
+        {
+            x=item.Sira;
+            break;
+        }
+            
+        @foreach (var item in Model)
+        {
+            var style = (item.Sira == x) ? "active" : "";
+            <div class="carousel-item @style">
+                @if (item.IsActive == true)
+                {
+                    <img class="d-block w-100" src="~/Images/Carousel/@item.Path" alt="@item.AlternateText" width="1200" height="400">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>@item.Name</h5>
+                        <p>@item.AlternateText</p>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Geri</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">İleri</span>
+    </a>
+</div>
+}

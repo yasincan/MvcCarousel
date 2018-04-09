@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MainCarousel.Models.Carousel>
+@{
+    ViewBag.Title = "CarouselCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Sira = 0;
+}
+<script>
+    function checkTextField(field) {
+        document.getElementById("error").innerText =
+            (field.value === "") ? "Boş Geçilemez." : "✔";
+    }
+    if (jQuery('#uploadfile').val() == '') {
+        $('#error').html("✔");
+    } else {
+        alert('Resim secilmedi');
+    }
+</script>
+<h2>Manşet Ekle</h2>
+<form action="CarouselCreate" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="inputdefault">Adı</label>
+        <input class="form-control" type="text" name="Name" id="Name" />
+    </div>
+    <div class="form-group">
+        <label for="inputdefault">Açıklama</label>
+        <input class="form-control" name="AlternateText" id="AlternateText" />
+    </div>
+        @foreach (var item in Model)
+        {
+            Sira = item.Sira + 1;
+        }        
+        <input style="display:none" name="Sira" id="Sira" value="@Sira" />
+    <div class="form-group">
+        <label for="inputdefault">Dosya Seç</label>
+        <input class="form-control-file" type="file" name="uploadfile" id="uploadfile" /><span class="alert-danger" id="error"></span>
+        <input style="display:none" name="IsActive" id="IsActive" value="True" />
+    </div>
+    <br />
+    <input class="btn" id="btn" type="submit" value="Ekle" />
+</form>
+<br />
+<div>
+    @Html.ActionLink("Geri", "Index")
+</div>
